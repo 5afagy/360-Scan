@@ -1,0 +1,13 @@
+# Built-in Python modules (for documentation, no need to install)
+# argparse - Command-line argument parsing (built-in)
+# asyncio - Asynchronous programming (built-in)
+# subprocess - System command execution (built-in)
+# re - Regular expression handling (built-in)
+# json - JSON data handling (built-in)
+# csv - CSV file operations (built-in)
+# xml.etree.ElementTree - XML parsing (built-in)
+# queue - Thread-safe queueing (built-in)
+
+# Third-party libraries (need installation)
+colorama==0.4.6  # For color-coded console output
+loguru==0.7.0    # For advanced logging
