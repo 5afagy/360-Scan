@@ -1,61 +1,54 @@
 # 360-Scan
 
-I want to build a penetration testing tool focused on file-sharing misconfigurations and brute-forcing for SMB, FTP, NFS, and HTTP services. This tool should take a **subnet as input** and follow these steps systematically:
+**360-Scan** is a fast, modular penetration testing tool focused on discovering and exploiting file-sharing misconfigurations across **SMB**, **FTP**, **NFS**, and **HTTP(S)**. It automates host discovery, service enumeration, brute-forcing, and sensitive-data detection—then outputs clean reports in JSON and CSV.
 
-1. **Subnet Scanning and Host Discovery**:
-   - Perform a ping sweep to discover live hosts in the subnet.
-   - Alternatively, perform port scanning on key file-sharing service ports (21, 80, 139, 445, 443, 2049).
+---
 
-2. **Service Detection**:
-   - Identify active services on the discovered hosts, focusing on:
-     - SMB (ports 139, 445).
-     - FTP (port 21).
-     - NFS (port 2049).
-     - HTTP/HTTPS (ports 80, 443).
+## 🔍 Features
 
-3. **Misconfiguration Checks**:
-   - **SMB**:
-     - List shared folders and check if they are accessible anonymously.
-     - Check for world-readable or writable shares.
-   - **FTP**:
-     - Test for anonymous login.
-     - Enumerate files and directories.
-     - Identify writable directories.
-   - **NFS**:
-     - List exported shares.
-     - Test if the shares can be mounted without authentication.
-     - Enumerate files in mounted shares.
-   - **HTTP**:
-     - Search for sensitive files and directories using brute-forcing techniques.
-     - Check for exposed backups, configuration files, and logs.
+- **Host Discovery:** Ping sweep or TCP port scan (21, 80, 139, 445, 443, 2049)  
+- **Service Detection:** Identifies SMB, FTP, NFS, and HTTP(S)  
+- **Misconfiguration Checks:**  
+  - **SMB:** list shares, check anonymous and writeable access  
+  - **FTP:** test for anonymous login, find writeable dirs  
+  - **NFS:** list exports, test unauthenticated mounts  
+  - **HTTP:** brute-force paths, find exposed configs/backups  
+- **Brute-Forcing:**  
+  - SMB/FTP/HTTP login brute-force using Hydra  
+  - Supports custom wordlists  
+- **Sensitive Data Search:** Detects secrets, passwords, tokens in discovered files  
+- **Reporting:** Exports full scan results to structured **JSON** and **CSV**  
+- **Performance:** Parallel scanning with optional brute-force skipping  
+- **Modular Design:** Easy to extend with new protocols or scanning modules  
 
-4. **Brute-Forcing**:
-   - If no misconfigurations are detected, automatically brute-force credentials:
-     - SMB and FTP using Hydra.
-     - HTTP authentication forms using wordlists.
-   - Allow integration with custom username/password wordlists.
+---
 
-5. **Sensitive Data Detection**:
-   - Search for sensitive information in accessible files using pattern matching (e.g., passwords, API keys, secrets).
+## ⚙️ Quickstart
 
-6. **Reporting**:
-   - Generate a structured report summarizing:
-     - Discovered hosts and their services.
-     - Misconfigurations and vulnerabilities.
-     - Brute-forcing results.
-   - Export the report in JSON and CSV formats.
+1. **Clone & install**  
+   ```bash
+   git clone https://github.com/your-org/360-Scan.git
+   cd 360-Scan
+   pip3 install -r requirements.txt
 
-7. **Performance**:
-   - Include parallel processing to handle multiple hosts efficiently.
-   - Allow options to limit testing to specific protocols or skip brute-forcing.
+2.  **Run a basic scan**
+   ```bash
+   sudo python3 360scan.py \
+  --subnet 192.168.1.0/24 \
+  --threads 10 \
+  --output-json results.json \
+  --output-csv results.csv
+```
 
-8. **Future-Proofing**:
-   - Build the tool in a modular way, so new protocols (e.g., cloud-based file-sharing) can be added easily.
-   - Provide a clean command-line interface for flexibility.
 
-**Technical Notes**:
-- Use **Python** as the primary programming language.
-- Leverage libraries like scapy for network scanning, pysmb or Impacket for SMB, ftplib for FTP, and requests for HTTP.
-- Incorporate tools like Nmap for service detection and Hydra for brute-forcing.
+> 💡 Use `--skip-brute` to avoid brute-force attempts, or `--smb-user/pass` for credentialed share access.
 
-I want the tool to be simple, aggressive, and efficient, targeting real-world file-sharing misconfigurations. Start coding this tool. Begin with a modular design, and provide explanations for each module.
+## 🤝 Contributing
+
+Pull requests welcome! Fork the project, create a feature branch, and open a PR with clear commits.
+
+---
+
+## 📄 License
+
+360-Scan is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
