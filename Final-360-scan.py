@@ -21,7 +21,7 @@ banner = r"""
 /____/\____/\____/   /____/\___/\__,_/_/ /_/ 
 
  360 Scan - Comprehensive Network Scanner v3.0
-      Author: CyberForce Team
+      Author: Khafagy
 """
 
 def print_banner():
