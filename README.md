@@ -27,7 +27,7 @@
 
 1. **Clone & install**  
    ```bash
-   git clone https://github.com/your-org/360-Scan.git
+   git clone https://github.com/5afagy/360-Scan.git
    cd 360-Scan
    pip3 install -r requirements.txt
 
